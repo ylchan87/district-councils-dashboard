@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
+import { Route, Switch } from "react-router-dom"
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { withStyles } from '@material-ui/core/styles'
-import NavBar from './layout/NavBar'
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from './ui/theme'
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import searchPage from './pages/search'
-import mapPage from './pages/map'
-
+import NavBar from './layout/NavBar'
+import SearchPage from './pages/search'
+import MapPage from './pages/map'
+import ProfilePage from './pages/profile'
+import NotfoundPage from './pages/notfound'
 import './App.css'
 
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 
 const theme = createMuiTheme
 
 const styles = theme => ({
   root: {
     display: 'flex',
-  }
+  },
+  // Load app bar information from the theme
+  // https://stackoverflow.com/questions/48508449/content-beneath-fixed-appbar
+  toolbar: theme.mixins.toolbar
 })
 class App extends Component {
   constructor(props) {
@@ -26,16 +30,20 @@ class App extends Component {
   render() {
     const { classes } = this.props
     return (
-      <Router basename="district-councils-dashboard">
-        <MuiThemeProvider theme={theme}>
-          <div className={classes.root}>
-            <CssBaseline />
-            <NavBar />
-            <Route exact path="/" component={searchPage} />
-            <Route exact path="/map" component={mapPage} />
-          </div>
-        </MuiThemeProvider>
-      </Router>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <NavBar />
+        <main>
+          <div className={classes.toolbar} />
+          {/* Content will be shifted downwards by the div above. If the div is removed, the content will disappear under the app bar. */}
+        <Switch>
+          <Route exact path="/" component={SearchPage} />
+          <Route exact path="/map" component={MapPage} />
+          <Route path="/profile/:name" component={ProfilePage} />
+          <Route component={NotfoundPage} />
+        </Switch>
+        </main>
+        </MuiThemeProvider >
     )
   }
 }

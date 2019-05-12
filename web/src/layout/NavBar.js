@@ -7,22 +7,22 @@ import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
 
 const styles = theme => ({
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-    }
+  grow: {
+    flexGrow: 1,
+  }
 })
 
 class NavBar extends Component {
     render() {
         const { classes } = this.props
         return (
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position="fixed">
             <Toolbar>
-              <Typography variant="h6" color="inherit" noWrap>
+              <Typography variant="h6" color="inherit" className={classes.grow}>
               District Council Dashboard
               </Typography>
-              <NavLink to="/"><Button color="inherit">Search</Button></NavLink>
-              <NavLink to="/map"><Button color="inherit">Map</Button></NavLink>
+              <Button component={NavLink} to="/">Search</Button>
+              <Button component={NavLink} to="/map">Map</Button>
             </Toolbar>
           </AppBar>
         )
