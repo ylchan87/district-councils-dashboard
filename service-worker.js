@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/district-councils-dashboard/precache-manifest.16bc810e75b916f83fd831973f6aa611.js"
+  "/district-councils-dashboard/precache-manifest.2913da386593a63460ce58e11bcf7515.js"
 );
 
 workbox.clientsClaim();
